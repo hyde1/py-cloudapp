@@ -4,13 +4,14 @@
 #Copyright (C)2010 Abhinandh <abhinandh@gmail.com>
 #This Program in licenser under General Public License Ver 3
     
-import sys
+import sys, signal
 from PyQt4.QtGui import QApplication, QSystemTrayIcon
 
 from droptarget import DropWidget
 import icons_rc
     
 def main():
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
     app = QApplication(sys.argv)
         
     if not QSystemTrayIcon.isSystemTrayAvailable():

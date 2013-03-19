@@ -73,8 +73,8 @@ class TrayIcon(QSystemTrayIcon):
         
         for item in self.fileList:
             newAction = QAction(self)
-            text = item["name"]
-            newAction.setText(text[:20] + ('...' if len(text) > 20 else ''))
+            text = '['+str(item['view_counter'])+'] '+item["name"]
+            newAction.setText(text[:35] + ('...' if len(text) > 35 else ''))
             newAction.setIcon(QIcon(":/icons/icons/" + QFileInfo(item["icon"]).fileName()))
             newAction.setIconVisibleInMenu(True)
             self.fileListMenu.addAction(newAction)
