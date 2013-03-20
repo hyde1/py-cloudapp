@@ -3,7 +3,7 @@
 #Copyright (C)2010 Abhinandh <abhinandh@gmail.com>
 #This Program in licenser under General Public License Ver 3
 
-from PyQt4.QtCore import QThread, QObject, pyqtSignal, QFileInfo, QUrl, QTimer
+from PyQt4.QtCore import QThread, QObject, pyqtSignal, QFileInfo, QUrl, QTimer, SIGNAL
 from cloud_api import CloudApi
 import urllib.parse, logging
 
@@ -17,11 +17,9 @@ class CloudHandle(object):
         self.pdialog = PreferencesDialog()
         self.pdialog.signals.settingsChanged.connect(self.initializeApi)
         self.signals = self.Signals()
+        self.updateTimer = QTimer();
+        QObject.connect(self.updateTimer, SIGNAL("timeout()"), self.getFileList)
         self.initializeApi()
-        self.updateTimer = QtCore.QTimer();
-
-	#Connect timer
-        QtCore.QObject.connect(self.ctimer, QtCore.SIGNAL("timeout()"), self.getFileList)
 
     def initializeApi(self):
         self.updateTimer.stop();
